@@ -13,10 +13,11 @@ class CreateCategoryTable extends Migration
      */
     public function up()
     {
-      Schema::create('category', function (Blueprint $table) {
+      Schema::create('categories', function (Blueprint $table) {
           $table->increments('id');
           $table->bigInteger('user_id')->unsigned();
-          $table->text('category_name');
+          $table->string('category_name', 80);
+          $table->unique(['user_id', 'category_name']);
           $table->timestamps();
           $table->foreign('user_id')
                 ->references('id')->on('users')
@@ -31,6 +32,6 @@ class CreateCategoryTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('category');
+        Schema::dropIfExists('categories');
     }
 }

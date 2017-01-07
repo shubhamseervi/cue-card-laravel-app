@@ -8,10 +8,11 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'App') }}</title>
 
     <!-- Styles -->
     <link href="/css/app.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
     <!-- Scripts -->
     <script>
@@ -19,6 +20,7 @@
             'csrfToken' => csrf_token(),
         ]); ?>
     </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 </head>
 <body>
     <div id="app">
@@ -36,7 +38,7 @@
 
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
+                        {{ config('app.name', 'Cue') }}
                     </a>
                 </div>
 
@@ -53,6 +55,9 @@
                             <li><a href="{{ url('/login') }}">Login</a></li>
                             <li><a href="{{ url('/register') }}">Register</a></li>
                         @else
+                            <li><a href="{{ url('/cards') }}">cards</a></li>
+                            <li><a href="{{ url('/cards/create') }}">add new</a></li>
+
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     {{ Auth::user()->name }} <span class="caret"></span>
@@ -83,5 +88,32 @@
 
     <!-- Scripts -->
     <script src="/js/app.js"></script>
+    @yield('javascript');
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+        <script type="text/javascript" src="{{ asset('css/toastr_settings.js') }}"></script>
+        <script>
+
+              @if(Session::has('message'))
+                  var type = "{{ Session::get('alert-type', 'info') }}";
+                  switch (type) {
+                    case 'info':
+                        toastr.info("{{ Session::get('message') }}");
+                        break;
+
+                    case 'warning':
+                        toastr.warning("{{ Session::get('message') }}");
+                        break;
+
+                    case 'success':
+                        toastr.success("{{ Session::get('message') }}");
+                        break;
+
+                    case 'error':
+                        toastr.error("{{ Session::get('message') }}");
+                        break;
+                    }
+                @endif
+
+      </script>
 </body>
 </html>

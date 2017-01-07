@@ -21,9 +21,12 @@ class CreateCardsTable extends Migration
           $table->text('back');
           $table->boolean('known')->default(0);
           $table->timestamps();
+
+          
           $table->foreign('user_id')
                 ->references('id')->on('users')
                 ->onDelete('cascade');
+
           $table->foreign('category_id')
                 ->references('id')->on('category')
                 ->onDelete('cascade');

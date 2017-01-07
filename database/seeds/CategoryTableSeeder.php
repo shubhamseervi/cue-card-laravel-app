@@ -14,7 +14,7 @@ class CategoryTableSeeder extends Seeder
      */
     public function run()
     {
-      DB::table('category')->truncate(); // truncating; so we always work with fresh data.
+      DB::table('categories')->truncate(); // truncating; so we always work with fresh data.
 
       $categoryName = [ 'javascript', 'algorithm', 'css',
                          'php', 'laravel', 'nodejs', 'vuejs',
@@ -24,7 +24,7 @@ class CategoryTableSeeder extends Seeder
 
     	$faker = Faker::create();
     	foreach (range(1,50) as $index) {
-	        DB::table('category')->insert([
+	        DB::table('categories')->insert([
             'user_id'        => $faker->numberBetween(1,50),
             'category_name'  => $categoryName[$faker->numberBetween(0,18)],
             'created_at' => Carbon::now(),
