@@ -33,25 +33,6 @@ class CategoriesController extends Controller
                   ->withInput();
          }
 
-   //
-  //   $messages = [
-  //   'category_name' => 'You already have this category'
-  //   ];
-   //
-  //   $rules = array(
-  //       'category_name' => 'required|unique_with:categories,user_id|max:80',
-  //       'body'          => 'required',
-  //   );
-   //
-  //   $validator = Validator::make($request->all(), $rules, $messages);
-   //
-  //  if ($validator->fails())
-  //   {
-  //         return back()
-  //                 ->withErrors($validator)
-  //                 ->withInput();
-  //   }
-
     Category::create([
               'user_id'       => Auth::user()->id,
               'category_name' => $request->input('category_name'),
